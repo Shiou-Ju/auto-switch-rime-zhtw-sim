@@ -49,8 +49,5 @@ EOF
 osascript /tmp/rime_deploy.scpt 2>/dev/null
 rm /tmp/rime_deploy.scpt  # 清理臨時文件
 
-# 給 Rime 一些時間處理部署
-sleep 3
-
 echo "設定已更新並已嘗試自動部署！如果切換仍未生效，請手動點擊輸入法圖標並選擇「重新部署」"
 
