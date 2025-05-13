@@ -30,7 +30,25 @@ im-select im.rime.inputmethod.Squirrel.Rime
 # 嘗試模擬按下 Control+Option+反引號 快捷鍵以觸發重新部署
 echo "嘗試重新部署..."
 # 使用單引號括起來的字符串，避免反引號被解釋
-osascript -e 'tell application "System Events" to key code 50 using {control down, option down}'
+# osascript -e 'tell application "System Events" to key code 50 using {control down, option down}'
+
+# 嘗試模擬按下 Control+Option+反引號 快捷鍵以觸發重新部署
+# shell 腳本中內聯 AppleScript 代碼。可能有 zsh 對反引號的處理問題。
+# 將 AppleScript 代碼保存到臨時文件以避免反引號問題
+cat > /tmp/rime_deploy.scpt << 'EOF'
+try
+  tell application "System Events"
+    key code 50 using {control down, option down}
+  end tell
+  "成功 AppleScript deploy script"
+on error errMsg
+  errMsg
+end try
+EOF
+
+# 執行 AppleScript 文件而不是內聯代碼
+osascript /tmp/rime_deploy.scpt 2>/dev/null
+rm /tmp/rime_deploy.scpt  # 清理臨時文件
 
 # 給 Rime 一些時間處理部署
 sleep 3
