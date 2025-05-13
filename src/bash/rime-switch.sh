@@ -32,7 +32,6 @@ echo "嘗試重新部署..."
 # 使用單引號括起來的字符串，避免反引號被解釋
 # osascript -e 'tell application "System Events" to key code 50 using {control down, option down}'
 
-# 嘗試模擬按下 Control+Option+反引號 快捷鍵以觸發重新部署
 # shell 腳本中內聯 AppleScript 代碼。可能有 zsh 對反引號的處理問題。
 # 將 AppleScript 代碼保存到臨時文件以避免反引號問題
 cat > /tmp/rime_deploy.scpt << 'EOF'
@@ -52,11 +51,6 @@ rm /tmp/rime_deploy.scpt  # 清理臨時文件
 
 # 給 Rime 一些時間處理部署
 sleep 3
-
-# 有可能出現可能部署需要較久，且或许不需要切換回去
-# 切換回原來的輸入法
-# echo "切換回原來的輸入法..."
-# im-select "$CURRENT_IM"
 
 echo "設定已更新並已嘗試自動部署！如果切換仍未生效，請手動點擊輸入法圖標並選擇「重新部署」"
 
